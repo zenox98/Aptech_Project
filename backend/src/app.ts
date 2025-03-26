@@ -1,18 +1,23 @@
 import express, {Express, Request, Response} from "express"
-import cors from "cors";
-import productRouter from "./apis/products/product.ts";
+
+// Middleware
+import { corsMiddleWare } from "./middleware/cors.middleware.ts";
+import { jsonMiddleWare } from "./middleware/json.middleware.ts";
+
+// api routes
+import apisRoutes from "./routes/apis/apis.ts"
 
 const app : Express = express()
 const port : number = 3000
 
 // Enable CORS for all origins (for developement; configure more restrictively in production)
-app.use(cors());
+app.use(corsMiddleWare);
 
 // Middleware to parse JSON request bodies
-app.use(express.json());
+app.use(jsonMiddleWare);
 
-// Mount the product routes
-app.use('/api/products', productRouter);
+// Mount the createNewTableProps
+app.use('/api', apisRoutes)
 
 app.get('/', (req : Request, res : Response) => {
   res.send('Hello World!')
