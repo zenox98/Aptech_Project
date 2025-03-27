@@ -4,12 +4,17 @@ import './index.css'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router'
 
 // screens
-import Home from './screens/Home/Home'
+import Home from './screens/NewEntry/NewEntry'
+import HomeLayout from './layouts/HomeLayout/HomeLayout'
+import ListOfEntries from './screens/ListOfEntries/ListOfEntries'
 
 const Router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<HomeLayout />} >
+        <Route path='/' element={<ListOfEntries />} />
+        <Route path="/createEntry" element={<Home />}/>
+      </Route>
     </Route>
   )
 )
